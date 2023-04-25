@@ -23,6 +23,13 @@ func main() {
 	router.HandleFunc("/edit_profile", controllers.EditProfile).Methods("PUT")
 	router.HandleFunc("/profile", controllers.LihatProfile).Methods("GET")
 
+	//MEMBER
+	router.HandleFunc("/restoran", controllers.Authenticate(controllers.LihatRestoran, 1)).Methods("GET")
+	router.HandleFunc("/restoran/{restoran_id}", controllers.Authenticate(controllers.LihatSpecificRestoran, 1)).Methods("GET")
+	router.HandleFunc("/order", controllers.Authenticate(controllers.LihatStatusOrder, 1)).Methods("GET")
+	router.HandleFunc("/order/{restoran_id}", controllers.Authenticate(controllers.UserOrder, 1)).Methods("POST")
+	router.HandleFunc("/pay_order", controllers.Authenticate(controllers.Pay_Order, 1)).Methods("POST")
+
 	http.Handle("/", router)
 	fmt.Println("Connected to port 7777")
 	log.Println("Connected to port 7777")
