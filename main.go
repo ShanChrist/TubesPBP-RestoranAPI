@@ -36,6 +36,12 @@ func main() {
 	router.HandleFunc("/finish_orderan", controllers.Authenticate(controllers.FinishOrderan, 3)).Methods("POST")
 	router.HandleFunc("/riwayat_orderan", controllers.Authenticate(controllers.LihatRiwayatOrderan, 3)).Methods("GET")
 
+	//MERCHANT	
+	router.HandleFunc("/register_restoran", controllers.Authenticate(controllers.RestoranRegister, 2)).Methods("POST")
+	router.HandleFunc("/insert_makanan", controllers.Authenticate(controllers.InsertMakanan, 2)).Methods("POST")
+	router.HandleFunc("/makanan", controllers.Authenticate(controllers.LihatMakanan, 2)).Methods("GET")
+	router.HandleFunc("/delete_makanan/{makanan_id}", controllers.Authenticate(controllers.DeleteMakanan, 2)).Methods("DELETE")
+
 	http.Handle("/", router)
 	fmt.Println("Connected to port 7777")
 	log.Println("Connected to port 7777")
